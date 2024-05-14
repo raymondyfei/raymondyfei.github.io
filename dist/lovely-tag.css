@@ -1,0 +1,96 @@
+@charset "UTF-8";
+@-webkit-keyframes 
+tagZoomIn {  from {
+ -webkit-transform: scale(0);
+ transform: scale(0);
+}
+
+to {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+}
+ @keyframes 
+tagZoomIn {  from {
+ -webkit-transform: scale(0);
+ transform: scale(0);
+}
+
+to {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+}
+
+.tags {
+  font-size: 0.8em;
+  margin: 0.5em 0;
+}
+
+.tags .tag {
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+
+.tag {
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  line-height: 220%;
+  color: #EBF0F2;
+  font-size: 80%;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+
+.tag.tag-blue { background-color: #84888C; }
+
+.tag.tag-blue2 { background-color: #5C6165; }
+
+.tag.tag-green { background-color: #AEB5BF; }
+
+.tag.tag-green2 { background-color: #71767C; }
+
+.tag.tag-red { background-color: #393D40; }
+
+.tag.tag-red2 { background-color: #858A90; }
+
+.tag.tag-cyan { background-color: #27282A; }
+
+.tag.tag-purple { background-color: #282C2F; }
+
+.tag.tag-orange { background-color: #666A6D; }
+
+.tag.added {
+  -webkit-transform-origin: right 50%;
+  transform-origin: right 50%;
+  -webkit-animation: tagZoomIn 0.3s forwards;
+  animation: tagZoomIn 0.3s forwards;
+}
+
+.tag.to-be-checked,
+.tag.to-be-crossed {
+  cursor: pointer;
+  color: #fff;
+  position: relative;
+  padding-right: 1.7em;
+}
+
+.tag.to-be-checked:after,
+.tag.to-be-crossed:after {
+  position: absolute;
+  top: 0.2em;
+  right: 0.5em;
+  font-weight: bold;
+}
+
+.tag.to-be-checked { background: #2cc185; }
+
+.tag.to-be-checked:after { content: '✔'; }
+
+.tag.to-be-crossed { background: #f4726d; }
+
+.tag.to-be-crossed:after { content: '×'; }
+
+.new-tag input[type="checkbox"] { display: none; }
+
+.new-tag .tag { cursor: pointer; }

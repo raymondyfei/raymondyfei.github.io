@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116473534-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-116473534-1');
+  </script>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Principles towards Real-Time Simulation of Material Point Method on Modern GPUs</title>
+  <meta name="google" content="notranslate" />
+  <meta name="keywords" content="integration, material point method, water, sand, hair, cloth, gpu">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <LINK rel=stylesheet type=text/css href="main.css" media=screen>
+  <link rel="stylesheet" href="./font_awesome/css/font-awesome.css">
+  <meta name="author" content="Raymond Fei" >
+  <meta name="author-url" content="http://yunfei.work/" >
+</head>
+
+<body>
+  <DIV id=wrapper>
+    <DIV id=logo>
+      <span id="subtitle"></span>
+      <H1>Principles towards Real-Time Simulation of Material Point Method on Modern GPUs</H1>
+      <P>Talks on Game Developers Conference (GDC) and <a
+href="https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41585/">NVIDIA GPU Technology Conference (GTC)</a>, 2022</P>
+      <br>
+      <P>
+        <a href="http://yunfei.work/">Yun (Raymond) Fei</a>, <a href="https://www.linkedin.com/in/yuhan-h-19024a18b/">Yuhan Huang</a>, and <a href="https://mingg13.github.io/">Ming Gao</a><br/>
+      </P>
+      <H4>Tencent Game AI Research Center and NVIDIA</H4>
+      <br>
+      <P>
+        <h4><span id="pp"></span> Paper <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h4>
+        Preprint: <a href="https://arxiv.org/pdf/2111.00699">Arxiv</a><br>
+	Note: Throughout this paper, the word "efficiency" means the <b>strong scaling</b> efficiency; and for the ideal speedup, we 
+consider all the parts as parallelizable.
+        <br><br>
+        <h4><span id="vd"></span> Video <i class='fa fa-youtube-play' aria-hidden='true'></i></h4>
+        Benchmark Video: <a href='https://youtu.be/4o-zdAyVHJk'>Youtube</a> | <a href="https://www.bilibili.com/video/BV1DF411a7KC/">BiliBili</a><br/><br/>
+	<h4><span id="tk"></span> Talk <i class='fa fa-slideshare' aria-hidden='true'></i></h4>
+	<a href="GTC_slides.pdf">Slides for GTC 2022</a><br/><br/>
+	<h4>Related Project <i class='fa fa-link' aria-hidden='true'></i></h4>
+	<a href="../asflip/index.html">Revisiting Integration in the Material Point Method: A Scheme for Easier Separation and Less Dissipation</a><br/><br/>
+      </P>
+    </DIV>
+    <DIV id=content>
+      <div id=maincontent>
+	<div id="performance" class=detail>
+	  <p class=staffitem>Performance</p>
+	  <img src="performance.png"/>
+	  <p>Compared with a multi-threaded MPM simulator on a CPU, our optimized GPU MPM simulator is two 
+magnitudes faster. For the sand block scenario with 389K particles, we reach a real-time framerate 
+in either one or four GPUs and an interactive framerate for the scenario with 3.1M particles.</p>
+	</div>
+	<div id="video" class=detail>
+	  <p class=staffitem>Video of Benchmark Scenarios</p>
+        <div class="video-container" id="videocontainer">
+          <iframe width='930' height='532' src="https://www.youtube.com/embed/4o-zdAyVHJk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+	</div>
+        <div id="abstract" class=detail>
+          <P class=staffitem>Abstract</P>
+          <p>Physics-based simulation has been actively employed in generating offline visual effects in the film and animation industry. However, the computations required for high-quality scenarios are generally immense, deterring its adoption in real-time applications, e.g., virtual production, avatar live-streaming, and cloud gaming. We summarize the principles that can accelerate the computation pipeline on single-GPU and multi-GPU platforms through extensive investigation and comprehension of modern GPU architecture. We further demonstrate the effectiveness of these principles by applying them to the material point method to build up our framework, which achieves 1.7×--8.6× speedup on a single GPU and 2.5×--14.8× on four GPUs compared to the state-of-the-art. Our pipeline is specifically designed for real-time applications (i.e., scenarios with small to medium particles) and achieves significant multi-GPU efficiency. We demonstrate our pipeline by simulating a snow scenario with 1.33M particles and a fountain scenario with 143K particles in real-time (on average, 68.5 and 55.9 frame-per-second, respectively) on four NVIDIA Tesla V100 GPUs interconnected with NVLinks.</p>
+        </div>
+	<div id="bibtex" class=detail>
+	  <P class=staffitem>BibTex</P>
+		<p>
+		@article{fei2021principles,<br>
+		&nbsp;&nbsp;author = {Fei, Yun (Raymond) and Huang, Yuhan and Gao, Ming},<br>
+		&nbsp;&nbsp;title = {Principles towards Real-Time Simulation of Material Point Method on Modern GPUs},<br>
+		&nbsp;&nbsp;journal = {arXiv preprint},<br>
+		&nbsp;&nbsp;volume = {abs/2111.00699},<br>
+		&nbsp;&nbsp;year = {2021},<br>
+		&nbsp;&nbsp;url = {https://arxiv.org/abs/2111.00699},<br>
+		&nbsp;&nbsp;eprinttype = {arXiv},<br>
+		&nbsp;&nbsp;eprint = {2111.00699}<br>
+		}
+		</p>
+	</div>
+        <br>
+        <div id="footer">
+          <script src="jquery-2.1.1.min.js"></script>
+          <script type="text/javascript">
+            $.getJSON('http://ipinfo.io', function(data){
+              console.log('Country: ' + data.country);
+              if (data.country=="CN") {
+                $('#videocontainer').html("<iframe width='930' height='640' src='//player.bilibili.com/player.html?aid=293971353&bvid=BV1DF411a7KC&cid=435387388&page=1' scrolling='yes' border='0' frameborder='no' framespacing='0' allowfullscreen='true'> </iframe>");
+              } 
+            })
+          </script>
+        </div>
+        <div id="footer2" class=detail>
+          <p>Copyright &copy; 2021 - 2021 Tencent and NVIDIA. All Rights Reserved.</p>
+        </div>
+      </div>
+    </DIV>
+  </DIV>
+</body>
+</html>

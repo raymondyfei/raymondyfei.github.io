@@ -1,0 +1,544 @@
+* {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+  PADDING-BOTTOM: 0px;
+  MARGIN: 0px;
+  PADDING-LEFT: 0px;
+  PADDING-TOP: 0px;
+}
+
+:focus {
+  OUTLINE-STYLE: none;
+  OUTLINE-COLOR: invert;
+  OUTLINE-WIDTH: 0px;
+}
+
+:active {
+  OUTLINE-STYLE: none;
+  OUTLINE-COLOR: invert;
+  OUTLINE-WIDTH: 0px;
+}
+
+BODY {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 300;
+  color: #212426;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #EBF0F2;
+  margin: 0;
+}
+
+.x {
+  CLEAR: both;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  color: #393D40
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+}
+
+IMG {
+  BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px;
+  BORDER-TOP: 0px;
+  BORDER-RIGHT: 0px;
+  display: block;
+}
+
+#portrait {
+  width: min(50%, 310px);
+}
+
+H2 {
+  MARGIN-BOTTOM: 2px;
+  COLOR: #333;
+  FONT-SIZE: 21px;
+  FONT-WEIGHT: normal;
+}
+
+H3 {
+  MARGIN-BOTTOM: 10px;
+  COLOR: #393D40;
+  FONT-SIZE: 14px;
+  FONT-WEIGHT: bolder;
+}
+
+H4 {
+  MARGIN: 3px 0px 5px;
+  FLOAT: left;
+  FONT-SIZE: 21px;
+  FONT-WEIGHT: normal;
+}
+
+#introduction {
+  margin-top: 16px;
+}
+
+#wrapper {
+  position: absolute;
+  top: 0%;
+  left: 2%;
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 100%;
+  transform-origin: 50% 0%;
+  background-size: 100%;
+  background-position-y: -12px;
+}
+
+#logo {
+  PADDING-BOTTOM: 10px;
+  PADDING-LEFT: 21px;
+  PADDING-RIGHT: 12px;
+  PADDING-TOP: 40px;
+  float: left;
+  width: calc(min(30%, 270px));
+}
+
+#logo H1 A {
+  COLOR: #333;
+}
+
+#logo H1 A SPAN {
+  COLOR: #000;
+}
+
+#content {
+  MIN-HEIGHT: 750px;
+  WIDTH: calc(max(70%, 100% - 280px));
+  HEIGHT: auto !important;
+  float: right;
+}
+
+.white-popup {
+  position: relative;
+  background: #CCD4D9;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* Magnific Popup CSS */
+
+.mfp-content {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 auto;
+  text-align: left;
+  z-index: 1045;
+}
+
+.mfp-hide {
+  display: none !important;
+}
+
+/* Main image in popup */
+
+img.mfp-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  line-height: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 60px 0 60px;
+  margin: 0 auto;
+}
+
+/* The shadow behind the image */
+
+.mfp-title {
+  text-align: left;
+  line-height: 18px;
+  color: #84888C;
+  word-wrap: break-word;
+  padding-right: 36px;
+}
+
+@media screen and (max-width: 600px) and (orientation: landscape), screen and (max-height: 225px) {
+  /**
+       * Remove all paddings around the image on small screen
+       */
+
+  .mfp-img-mobile img.mfp-img {
+    padding: 0;
+  }
+}
+
+.mfp-ie7 .mfp-img {
+  padding: 0;
+}
+
+.mfp-ie7 .mfp-content {
+  padding-top: 44px;
+}
+
+#maincontent {
+  PADDING-BOTTOM: 20px;
+  PADDING-RIGHT: 20px;
+  MARGIN: 9px 24px 30px;
+  WIDTH: 92%;
+  FLOAT: left;
+}
+
+.name A {
+  text-decoration: none;
+}
+
+.detail IMG {
+  MARGIN: 5px 20px 10px 0px;
+  FLOAT: left;
+}
+
+#footer {
+  MARGIN: 20px 0px 20px 20px;
+  COLOR: #666;
+  FONT-SIZE: 18px;
+}
+
+.intro IMG {
+  MARGIN: 0px 0px 0px 8px;
+  FLOAT: right;
+}
+
+.titleitem {
+  font-weight: 600;
+}
+
+.staffitem {
+  LINE-HEIGHT: 200%;
+  MARGIN-TOP: 20px;
+  MARGIN-BOTTOM: 0px;
+  FONT-SIZE: 30px;
+  font-weight: 700;
+  font-family: "Oswald";
+}
+
+.detail P {
+  MARGIN: 12px 0px 9px;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+}
+
+.white-popup P {
+  LINE-HEIGHT: 150%;
+  MARGIN: 12px 0px 9px;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+  font-family: "Titillium Web", "Microsoft YaHei", "微软雅黑", 
+             STXihei, "华文细黑", 
+             sans-serif;
+  font-size: 75%;
+  letter-spacing: 2px;
+}
+
+.intro P {
+  font-family: "Titillium Web", "Microsoft YaHei", "微软雅黑", 
+             STXihei, "华文细黑", 
+             sans-serif;
+  font-weight: 300;
+  LINE-HEIGHT: 150%;
+  MARGIN-BOTTOM: 6px;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+  letter-spacing: 2px;
+  font-size: 75%;
+}
+
+article,details,footer,header {
+  display: block;
+}
+
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+[hidden] {
+  display: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a:hover,a:active {
+  outline: 0;
+}
+
+b,strong {
+  font-weight: bold;
+}
+
+small {
+  font-size: 85%;
+}
+
+sub,sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-image: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+big,small {
+  font-size: 100%;
+}
+
+@media print {
+  html,  body {
+    background: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  a,  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href^="javascript:"]:after,  a[href^="#"]:after {
+    content: "";
+  }
+
+  tr,  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+@page {
+    margin: 0.5cm;
+}
+
+  p,  h2,  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,  h3 {
+    page-break-after: avoid;
+  }
+}
+
+/*!
+ *  Font Awesome 4.0.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (font-family: SIL OFL 1.1, CSS: MIT License)
+ */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("../fonts/fontawesome-webfont.eot?v=4.0.3");
+  src: url("../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff?v=4.0.3") format("woff"), url("../fonts/fontawesome-webfont.ttf?v=4.0.3") format("truetype"), url("../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+
+  100% {
+    -ms-transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mobile-hide {
+    display: none;
+  }
+}
+
+a {
+  color: #212426;
+}
+
+a:hover {
+  color: #84888C;
+}
+
+a:visited {
+  color: #212426;
+}
+
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+small {
+  font-size: 80%;
+}
+
+h1 {
+  font-family: "Oswald", sans serif;
+  font-size: 200%;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+h2 {
+  font-family: "Oswald";
+  font-size: 150%;
+}
+
+h3 {
+  font-family: "Oswald";
+  font-size: 125%;
+}
+
+h4 {
+  font-family: "Oswald";
+  font-size: 115%;
+}
+
+h5 {
+  font-family: "Oswald";
+  font-size: 110%;
+}
+
+h6 {
+  font-family: "Oswald";
+  font-size: 100%;
+}
+
+div[class^='highlight'] {
+  border: 1px solid #CCD4D9;
+  padding: 0px;
+  overflow-x: auto;
+  background: #EBF0F2;
+  margin: 2px 0 48px 0;
+}
+
+div[class^='highlight'] div[class^='highlight'] {
+  border: none;
+  background: none;
+  margin: 0;
+}
+
+@media print {
+  div[class^='highlight'] {
+    white-space: pre-wrap;
+  }
+}
+
+[data-menu-wrap] {
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  position: absolute;
+  opacity: 1;
+  width: 100%;
+  opacity: 0;
+}
+
+footer {
+  color: #8488BC;
+}
+
+footer p {
+  margin-bottom: 24px;
+}
+
+span[id*='MathJax-Span'] {
+  color: #393D40;
+}

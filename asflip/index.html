@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116473534-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-116473534-1');
+  </script>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Revisiting Integration in the Material Point Method: A Scheme for Easier Separation and Less Dissipation</title>
+  <meta name="google" content="notranslate" />
+  <meta name="description" content="The material point method recently demonstrated its efficacy at simulating many materials and the coupling between them on a massive scale. However, in scenarios containing debris, MPM manifests more dissipation and numerical viscosity than traditional Lagrangian methods. We have two observations from carefully revisiting existing integration methods used in MPM. First, nearby particles would end up with smoothed velocities without recovering momentum for each particle during the particle-grid-particle transfers. Second, most existing integrators assume continuity in the entire domain and advect particles by directly interpolating the positions from deformed nodal positions, which would trap the particles and make them harder to separate. We propose an integration scheme that corrects particle positions at each time step. We demonstrate our method's effectiveness with several large-scale simulations involving brittle materials. Our approach effectively reduces diffusion and unphysical viscosity compared to traditional integrators.">
+  <meta name="keywords" content="integration, material point method, water, sand, hair, cloth">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <LINK rel=stylesheet type=text/css href="main.css" media=screen>
+  <link rel="stylesheet" href="./font_awesome/css/font-awesome.css">
+  <meta name="author" content="Raymond Fei" >
+  <meta name="author-url" content="http://yunfei.work/" >
+</head>
+
+<body>
+  <DIV id=wrapper>
+    <DIV id=logo>
+      <span id="subtitle"></span>
+      <H1>Revisiting Integration in the Material Point Method</H1>
+      <H3>A Scheme for Easier Separation and Less Dissipation</H3>
+      <P>ACM Transactions on Graphics (<a href="https://s2021.siggraph.org">SIGGRAPH North America 2021</a>)</P>
+      <br>
+      <P>
+        <a href="http://yunfei.work/">Yun (Raymond) Fei</a>, <a href="https://qig.github.io/">Qi Guo</a>, <a href="http://www.cs.cornell.edu/~rundongwu/">Rundong Wu</a>, <a href="https://www.linkedin.com/in/huangli1037/">Li Huang</a> and <a href="https://mingg13.github.io/">Ming Gao</a><br/>
+      </P>
+      <H4><a href="http://gcloud.tencent.com/pages/research/game-ai.html">Tencent Game AI Research Center</a></H4>
+      <br>
+      <P>
+        <h4><span id="pp"></span> Paper <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h4>
+        Preprint: <a href="main.pdf">Original (13.8MB)</a> | <a href="main_reduced.pdf">Reduced (2.4MB)</a>
+        <br><br>
+        <h4><span id="vd"></span> Video <i class='fa fa-youtube-play' aria-hidden='true'></i></h4>
+        Main Video: <a href="https://www.bilibili.com/video/BV1Xh411e7ci/">BiliBili</a> | <a 
+href="https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3450626.3459678&file=a109-fei.mp4">ACM Digital Library</a><br/>
+        Talk: <a href="asflip_slides.pdf">Slides</a>
+        <br><br>
+        <h4><span id="ipr"></span> In Press <i class="fa fa-podcast" aria-hidden="true"></i></h4>
+<a href="https://youtu.be/Lp4k4O_HEeQ">Two Minute Papers</a> | <a 
+href="https://www.gameres.com/884567.html">GameRes (in Chinese)</a> | <a 
+href="https://techacute.com/graphics-material-point-method-video/">TechAcute</a>
+    <br/><br/>
+        <h4><span id="scda"></span> Didactic Demo <i class='fa fa-github' aria-hidden='true'></i></h4>
+        <a href="https://github.com/nepluno/pyasflip">GitHub</a><br/><br/>
+	<h4>Implementation Details <i class='fa fa-link' aria-hidden='true'></i></h4>
+	<a href="../gpu_mpm/index.html">Principles towards Real-Time Simulation of Material Point Method on Modern GPUs</a><br/><br/>
+      </P>
+    </DIV>
+    <DIV id=content>
+      <div id=maincontent>
+          <div class="video-container" id="videocontainer">
+<iframe width="930" height="532" src="https://www.youtube.com/embed/Xtz9yat0cjQ?si=bx5TN_ykUd-qZt3p" title="YouTube video player" frameborder="0" allow="accelerometer; 
+autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        <div id="showcode" class=detail>
+        <P class=staffitem>Minimal Code Modification</P>
+        <a href="https://github.com/nepluno/pyasflip"><img src='figs/asflip_code.png' alt='minimal code modification'/></a>
+        <p>One of the <b>primary goals</b> of this project is to achieve an energetic simulation with <b>minimal modifications</b> to a classic MPM solver. 
+          <b>Less than 15 lines of code</b> need to be added or modified for the FLIP integrator to become an ASFLIP integrator.</p>
+        </div>
+        <div id="abstract" class=detail>
+          <P class=staffitem>Abstract</P>
+          <p>The material point method recently demonstrated its efficacy at simulating many materials and the coupling between them on a massive scale. However, in scenarios containing debris, MPM manifests more dissipation and numerical viscosity than traditional Lagrangian methods. We have two observations from carefully revisiting existing integration methods used in MPM. First, nearby particles would end up with smoothed velocities without recovering momentum for each particle during the particle-grid-particle transfers. Second, most existing integrators assume continuity in the entire domain and advect particles by directly interpolating the positions from deformed nodal positions, which would trap the particles and make them harder to separate. We propose an integration scheme that corrects particle positions at each time step. We demonstrate our method's effectiveness with several large-scale simulations involving brittle materials. Our approach effectively reduces diffusion and unphysical viscosity compared to traditional integrators.</p>
+        </div>
+        <div id="images" class=detail>
+          <P class=staffitem><span id="gly"></span> Gallery</P>
+          <table width="100%">
+            <tr>
+              <td align='center' width="20%">
+                <a href='figs/brush_large.jpg'>
+                 <img src='figs/brush_small.jpg' alt='' />
+                </a>
+              </td>
+              <td align='center' width="20%">
+                <a href='figs/fountain_large.png'>
+                 <img src='figs/fountain_small.jpg' alt='' />
+                </a>
+              </td>
+              <td align='center' width="20%">
+                <a href='figs/hair_large.jpg'>
+                 <img src='figs/hair_small.jpg' alt='' />
+                </a>
+              </td>
+              <td align='center' width="20%">
+                <a href='figs/sand_large.png'>
+                 <img src='figs/sand_small.jpg' alt='' />
+                </a>
+              </td>
+              <td align='center' width="20%">
+                <a href='figs/sand_wheel_large.jpg'>
+                 <img src='figs/sand_wheel_small.jpg' alt='' />
+                </a>
+              </td>                                        
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div id="acknowledgments" class=detail>
+          <P class=staffitem><span id="ack"></span> Acknowledgments</P>
+          <p>We thank Chendi (Wayne) Wei, Bo (Brandon) Yang, Bing (Binbin) Tang, Jun (Jim) Yin, Dafu (Hyton) Deng, Xiaochun (Willim) Cui and other colleagues in Common R&D Operation System (CROS) of Tencent IEG for their full support, Hua (Toby) Zhang, Jingxiang Li, Cheng Ge and other colleagues in NExT Studios for the modeling and shading of Cassandra Chen, Jiarun (Kelvin) Cai for discussions on Unreal plugin development, Katherian Xia and Sean Hu for proofreading, and Yichen (Peter) Chen for sharing the example setup in Fig. 5. In addition, we would like to thank the anonymous reviewers for their insightful comments.
+          </p>
+        </div>
+        <div id="footer2" class=detail>
+          <p>Copyright &copy; 2021 - 2021 Tencent. All Rights Reserved.</p>
+        </div>
+      </div>
+    </DIV>
+  </DIV>
+</body>
+</html>
