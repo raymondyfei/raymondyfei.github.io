@@ -106,6 +106,16 @@
           <DIV id=techtransfers class=detail>
             <P class=staffitem>TECH TRANSFERS</P>
             <p>
+              <b>Rasterization and GPU Pathtracing of Gaussian Splats</b><br />
+              Shipped in <a href="https://helpx.adobe.com/substance-3d-viewer.html">Adobe Substance 3D Viewer</a> (Beta), 
+2024<br />
+              <a 
+href="https://www.linkedin.com/posts/martin-nebelong_adobe-art-gaussiansplatting-activity-7252067862486405120-vNgA/">LinkedIn Post</a><br 
+/>
+              In collaboration with other team members in 3D&I and Research.<br/>
+              <span class="tag tag-purple">GPU</span> <span class="tag tag-green2">machine learning</span> <span class="tag tag-blue2">rendering</span>
+            </p>
+            <p>
               <b>AI-based Search in 3D Asset Library</b><br />
               Shipped in <a href="https://www.adobe.com/products/substance3d-stager.html">Adobe Substance Modeler</a> 1.8.50 (Public Beta), 
 2024<br />
@@ -138,6 +148,24 @@ href="https://www.linkedin.com/posts/lydiachoy_here-is-a-better-example-of-searc
           </DIV>
           <DIV id=pubs class=detail>
             <P class=staffitem>PUBLICATIONS</P>
+            <P>
+              <b>Trading Spaces: Adaptive Subspace Time Integration for Contacting Elastodynamics</b><br />
+              ACM Transactions on Graphics (SIGGRAPH Asia), 2024<br />
+              <span class=name>
+                <a href="https://www.dgp.toronto.edu/~trusty/">Ty Trusty</a>,
+                <STRONG>Yun (Raymond) Fei</STRONG>,
+                <a href="http://142.93.146.228/researchdb/">David I. W. Levin</a>,
+                <a href="https://dannykaufman.io/">Danny M. Kaufman</a>
+                </span>
+              <br />
+              <a href="#abs-tsa" class="open-popup-link">Abstract</a><br />
+              <span class="tag tag-blue">simulation</span> <span class="tag tag-orange">geometry</span>
+            </p>
+            <div id="abs-tsa" class="white-popup mfp-hide">
+              <p>
+                We construct a subspace simulator that adaptively balances solution improvement against system size. The core components of our simulator are an adaptive subspace oracle, model, and parallel time-step solver algorithm. Our in-time-step adaptivity oracle continually assesses subspace solution quality and candidate update proposals while accounting for temporal variations in deformation and spatial variations in material. In turn our adaptivity model is subspace agnostic. It allows application across subspace representations and expresses unrestricted deformations independent of subspace choice. We couple our oracle and model with a custom-constructed parallel time-step solver for our enriched systems that exposes a pair of user tolerances which provide controllable simulation quality. As tolerances are tightened our model converges to full-space solutions (with expected cost increases). On the other hand, as tolerances are relaxed we obtain output-bound simulation costs. We demonstrate the efficacy of our approach across a wide range of challenging nonlinear materials models, material stiffnesses, heterogeneities, dynamic behaviors, and frictionally contacting conditions, obtaining scalable and efficient simulations of complex elastodynamic scenarios.
+              </p>
+            </div>
             <P>
               <b>Progressive Shell Quasistatics for Unstructured Meshes</b><br />
               ACM Transactions on Graphics (SIGGRAPH Asia), 2023
