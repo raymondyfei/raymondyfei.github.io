@@ -151,7 +151,7 @@ href="https://www.linkedin.com/posts/lydiachoy_here-is-a-better-example-of-searc
             <P class=staffitem>PUBLICATIONS</P>
             <p>
               <b>Stochastic Ray Tracing of 3D Transparent Gaussians</b><br />
-              arXiv Preprint, 2025<br />
+              In Eurographics Symposium on Rendering (EGSR), 2025<br />
               <span class=name>
                 <a href="https://www.sunxin.name/">Xin Sun</a>,
                 <a href="https://iliyan.com/">Iliyan Georgiev</a>,
@@ -159,25 +159,32 @@ href="https://www.linkedin.com/posts/lydiachoy_here-is-a-better-example-of-searc
                 <a href="http://www.miloshasan.net/">Miloš Hašan</a>
                 </span>
               <br />
-              <a href="#abs-srt3d" class="open-popup-link">Abstract</a> | <a href="#bib-srt3d" class="open-popup-link">BibTex</a> | <a href="https://arxiv.org/pdf/2504.06598">PDF (arXiv)</a><br />
+              <a href="#abs-srt3d" class="open-popup-link">Abstract</a> | <a href="#bib-srt3d" class="open-popup-link">BibTex</a> | <a href="https://arxiv.org/pdf/2504.06598">Preprint (arXiv)</a><br />
               <span class="tag tag-purple">GPU</span> <span class="tag tag-blue2">rendering</span> <span class="tag tag-green2">machine learning</span>
             </p>
             <div id="abs-srt3d" class="white-popup mfp-hide">
               <p>
-                3D Gaussian splatting has recently been widely adopted as a 3D representation for novel-view synthesis, relighting, and text-to-3D generation tasks, offering realistic and detailed results through a collection of explicit 3D Gaussians carrying opacities and view-dependent colors. However, efficient rendering of many transparent primitives remains a significant challenge. Existing approaches either rasterize the 3D Gaussians with approximate sorting per view or rely on high-end RTX GPUs to exhaustively process all ray-Gaussian intersections (bounding Gaussians by meshes). This paper proposes a stochastic ray tracing method to render 3D clouds of transparent primitives. Instead of processing all ray-Gaussian intersections in sequential order, each ray traverses the acceleration structure only once, randomly accepting and shading a single intersection (or N intersections, using a simple extension). This approach minimizes shading time and avoids sorting the Gaussians along the ray while minimizing the register usage and maximizing parallelism even on low-end GPUs. The cost of rays through the Gaussian asset is comparable to that of standard mesh-intersection rays. While our method introduces noise, the shading is unbiased, and the variance is slight, as stochastic acceptance is importance-sampled based on accumulated opacity. The alignment with the Monte Carlo philosophy simplifies implementation and easily integrates our method into a conventional path-tracing framework.
+                3D Gaussian splatting has been widely adopted as a 3D representation for novel-view synthesis, relighting, and 3D generation
+                tasks. It delivers realistic and detailed results through a collection of explicit 3D Gaussian primitives, each carrying opacity
+                and view-dependent color. However, efficient rendering of many transparent primitives remains a significant challenge. Existing
+                approaches either rasterize the Gaussians with approximate per-view sorting or rely on high-end RTX GPUs. This paper
+                proposes a stochastic ray-tracing method to render 3D clouds of transparent primitives. Instead of processing all ray-Gaussian
+                intersections in sequential order, each ray traverses the acceleration structure only once, randomly accepting and shading a
+                single intersection (or N intersections, using a simple extension). This approach minimizes shading time and avoids primitive
+                sorting along the ray, thereby minimizing register usage and maximizing parallelism even on low-end GPUs. The cost of rays
+                through the Gaussian asset is comparable to that of standard mesh-intersection rays. The shading is unbiased and has low
+                variance, as our stochastic acceptance achieves importance sampling based on accumulated weight. The alignment with Monte
+                Carlo philosophy simplifies implementation and integration into a conventional path-tracing framework.
               </p>
             </div>
             <div id="bib-srt3d" class="white-popup mfp-hide">
               <p>
-                @article{sun2025stochastic,<br />
+                @inproceedings{sun2025stochastic,<br />
                 &nbsp;&nbsp;author = {Sun, Xin and Georgiev, Iliyan and Fei, Yun (Raymond) and Ha{\v{s}}an, Milo{\v{s}}},<br />
                 &nbsp;&nbsp;title = {Stochastic Ray Tracing of 3D Transparent Gaussians},<br />
-                &nbsp;&nbsp;journal = {arXiv preprint},<br />
-                &nbsp;&nbsp;volume = {abs/2504.06598},<br />
+                &nbsp;&nbsp;booktitle = {Eurographics Symposium on Rendering 2025 (EGSR 2025)},<br />
                 &nbsp;&nbsp;year = {2025},<br />
-                &nbsp;&nbsp;url = {https://arxiv.org/abs/2504.06598},<br />
-                &nbsp;&nbsp;eprinttype = {arXiv},<br />
-                &nbsp;&nbsp;eprint = {2504.06598}<br />
+                &nbsp;&nbsp;organization = {Eurographics Association}<br />
                 }
               </p>
             </div>
