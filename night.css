@@ -27,7 +27,7 @@ BODY {
   color: #EBF0F2;
   min-height: 100%;
   overflow-x: hidden;
-  background: #212426;
+  background: #1a1c1f;
   margin: 0;
 }
 
@@ -120,7 +120,7 @@ H4 {
 
 .white-popup {
   position: relative;
-  background: #212426;
+  background: #1a1c1f;
   padding: 20px;
   width: auto;
   max-width: 500px;

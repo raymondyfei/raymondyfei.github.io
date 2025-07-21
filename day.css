@@ -24,7 +24,7 @@
 BODY {
   font-family: "Titillium Web", sans-serif;
   font-weight: 300;
-  color: #212426;
+  color: #1a1c1f;
   min-height: 100%;
   overflow-x: hidden;
   background: #EBF0F2;
@@ -448,7 +448,7 @@ big,small {
 }
 
 a {
-  color: #212426;
+  color: #1a1c1f;
 }
 
 a:hover {
@@ -456,7 +456,7 @@ a:hover {
 }
 
 a:visited {
-  color: #212426;
+  color: #1a1c1f;
 }
 
 html {
