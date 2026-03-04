@@ -662,7 +662,7 @@ href="https://www.linkedin.com/posts/lydiachoy_here-is-a-better-example-of-searc
         <DIV class=x></DIV>
         <!-- footer -->
         <DIV id=footer>
-          ©2012-2023. All Rights Reserved.
+          ©2012-<span id="footer_year"></span>. All Rights Reserved.
         </DIV>
       </DIV>
     </DIV>
@@ -674,6 +674,9 @@ href="https://www.linkedin.com/posts/lydiachoy_here-is-a-better-example-of-searc
         type: 'inline',
         midClick: true
       });
+    </script>
+    <script>
+      document.getElementById("footer_year").textContent = new Date().getFullYear();
     </script>
   </BODY>
 </HTML>
