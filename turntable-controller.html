@@ -133,6 +133,15 @@
 
   .muted { color: var(--muted); font-size: 14px; }
 
+  .footer {
+    margin-top: 22px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
   footer {
     margin-top: 28px;
     padding-top: 14px;
@@ -207,7 +216,7 @@
     <button id="rightInfBtn" disabled>Rotate Right ∞</button>
   </div>
 
-  <footer>Supports Foldio360 series turntables.</footer>
+  <footer class="footer">Supports Foldio360 series turntables.</footer>
 </div>
 
 <script>
@@ -232,7 +241,6 @@ const state = {
   server:   null,   // GATT server
   writeCh:  null,   // CBCharacteristic for writes
   notifyCh: null,   // CBCharacteristic for notifies
-  repeat:   { active: false, right: true },
 };
 
 /* ----- DOM helpers ----- */
@@ -328,33 +336,26 @@ function onDisconnected() {
   setStatus('Device disconnected.', 'err');
   ui.label.textContent = 'No device connected';
   setControlsEnabled(false);
-  state.repeat.active = false;
   state.server = state.writeCh = state.notifyCh = null;
 }
+
+/* The firmware's native "infinite" command is angle=0 (the iOS app's
+ * "Infinitely" repeat mode sends exactly this).  The angle textbox only
+ * applies to the single-rotation buttons. */
 
 /* ----- Notifications ----- */
 function onNotify(ev) {
   const text = new TextDecoder().decode(ev.target.value).trim();
   setStatus(text, text === 'OK' ? 'ok' : (text === 'FAIL' ? 'err' : ''));
-  // Continuous mode: re-fire on completion OK.
-  if (text === 'OK' && state.repeat.active && state.writeCh) {
-    const angle = parseInt(ui.angle.value, 10) || 360;
-    state.writeCh.writeValueWithoutResponse(
-      cmdRotate(state.repeat.right, angle))
-      .catch((e) => console.warn('repeat failed:', e));
-  }
 }
 
 /* ----- Sending ----- */
 async function sendRotate(right, infinite) {
   if (!state.writeCh) return;
-  const angle = parseInt(ui.angle.value, 10) || 360;
-  state.repeat.active = !!infinite;
-  state.repeat.right  = right;
+  const angle = infinite ? 0 : (parseInt(ui.angle.value, 10) || 360);
   try {
     await state.writeCh.writeValueWithoutResponse(cmdRotate(right, angle));
-    setStatus(`-> rotate(${right ? 'CW' : 'CCW'},${angle},${SPEED},0)` +
-              (infinite ? '  (continuous)' : ''),
+    setStatus(`-> rotate(${right ? 'CW' : 'CCW'},${angle},${SPEED},0)`,
               'busy');
   } catch (err) {
     setStatus('Write failed: ' + err.message, 'err');
@@ -363,7 +364,6 @@ async function sendRotate(right, infinite) {
 
 async function sendStop() {
   if (!state.writeCh) return;
-  state.repeat.active = false;
   try {
     await state.writeCh.writeValueWithoutResponse(cmdStop());
     setStatus('-> cancel(0)', 'busy');
