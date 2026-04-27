@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simple Turntable Controller</title>
+<style>
+  :root {
+    --bg:        #2b2b2b;
+    --panel:    #383838;
+    --panel-2:  #2f2f2f;
+    --line:     #4a4a4a;
+    --btn:      #3d3d3d;
+    --btn-hi:   #4a4a4a;
+    --btn-down: #2a2a2a;
+    --text:     #e6e6e6;
+    --muted:    #a8a8a8;
+    --accent:   #6aa9ff;
+    --danger:   #d97757;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .app {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 24px;
+    background: var(--panel);
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
+  }
+
+  h1 {
+    margin: 0 0 24px 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--panel-2);
+    padding: 10px 14px;
+    border-radius: 4px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .row > * { flex: 0 0 auto; }
+  .row .grow { flex: 1 1 auto; }
+
+  /* --------- inputs / select --------- */
+  select, input[type=number] {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 16px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  select { min-width: 280px; }
+
+  select:focus, input:focus {
+    border-color: var(--accent);
+  }
+
+  input[type=number] {
+    width: 90px;
+    text-align: center;
+  }
+
+  /* --------- buttons --------- */
+  button {
+    background: var(--btn);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.08s, border-color 0.08s;
+    min-width: 110px;
+    min-height: 44px; /* iOS recommended touch target */
+  }
+  button:hover:not(:disabled)  { background: var(--btn-hi); }
+  button:active:not(:disabled) { background: var(--btn-down); }
+  button:disabled              { opacity: 0.45; cursor: not-allowed; }
+
+  button.stop {
+    background: #5a3833;
+    border-color: #7a4d44;
+  }
+  button.stop:hover:not(:disabled)  { background: #6f433c; }
+  button.stop:active:not(:disabled) { background: #4a2e29; }
+
+  /* --------- status --------- */
+  .status {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: var(--muted);
+    min-height: 18px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .status.ok    { color: #97e29a; }
+  .status.err   { color: #ff8b73; }
+  .status.busy  { color: #6aa9ff; }
+
+  .group-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 18px 0 6px 2px;
+  }
+
+  .muted { color: var(--muted); font-size: 14px; }
+
+  footer {
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* --------- mobile --------- */
+  @media (max-width: 640px) {
+    .app {
+      margin: 0;
+      padding: 16px;
+      border-radius: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    /* Three-button rows: each takes a third minus the gap. */
+    .row.three button {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 14px 8px;
+      font-size: 15px;
+    }
+    /* Angle row: input gets a wider share, buttons fill the rest. */
+    .row.angle button {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 14px 8px;
+      font-size: 15px;
+    }
+    .row.angle input[type=number] {
+      width: 80px;
+    }
+    /* Connect row: button stays normal, label wraps. */
+    #scanBtn { flex: 1 1 auto; }
+    #deviceLabel { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>Simple Turntable Controller</h1>
+
+  <!-- 2. Device picker -->
+  <div class="row">
+    <button id="scanBtn">Connect to device</button>
+    <span id="deviceLabel" class="grow muted">No device connected</span>
+  </div>
+
+  <!-- 3. Status -->
+  <div class="status" id="status">Idle.</div>
+
+  <!-- 4. Rotate by angle -->
+  <div class="group-title">Rotate by angle</div>
+  <div class="row angle">
+    <button id="leftBtn"  disabled>Rotate Left</button>
+    <input type="number" id="angle" value="360" min="1" max="9999" step="1">
+    <button id="rightBtn" disabled>Rotate Right</button>
+  </div>
+
+  <!-- 5. Continuous controls -->
+  <div class="group-title">Continuous</div>
+  <div class="row three">
+    <button id="leftInfBtn"  disabled>Rotate Left ∞</button>
+    <button id="stopBtn"     disabled class="stop">Stop</button>
+    <button id="rightInfBtn" disabled>Rotate Right ∞</button>
+  </div>
+
+  <footer>Supports Foldio360 series turntables.</footer>
+</div>
+
+<script>
+'use strict';
+
+/* ----- Foldio360 BLE protocol (Nordic UART) ----- */
+const NUS_SERVICE = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const NUS_WRITE   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const NUS_NOTIFY  = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const SPEED       = 2;
+
+function cmdRotate(right, angle, speed = SPEED) {
+  const dir = right ? 'CW' : 'CCW';
+  return new TextEncoder().encode(`rotate(${dir},${angle},${speed},0)`);
+}
+function cmdStop()   { return new TextEncoder().encode('cancel(0)'); }
+function cmdHello()  { return new TextEncoder().encode('get_status'); }
+
+/* ----- App state ----- */
+const state = {
+  device:   null,   // BluetoothDevice
+  server:   null,   // GATT server
+  writeCh:  null,   // CBCharacteristic for writes
+  notifyCh: null,   // CBCharacteristic for notifies
+  repeat:   { active: false, right: true },
+};
+
+/* ----- DOM helpers ----- */
+const $ = (id) => document.getElementById(id);
+const ui = {
+  scan:   $('scanBtn'),
+  label:  $('deviceLabel'),
+  status: $('status'),
+  angle:  $('angle'),
+  left:   $('leftBtn'),
+  right:  $('rightBtn'),
+  leftInf:  $('leftInfBtn'),
+  rightInf: $('rightInfBtn'),
+  stop:   $('stopBtn'),
+};
+
+function setStatus(text, kind = '') {
+  ui.status.textContent = text;
+  ui.status.className = 'status' + (kind ? ' ' + kind : '');
+}
+
+function setControlsEnabled(connected) {
+  for (const b of [ui.left, ui.right, ui.leftInf, ui.rightInf, ui.stop]) {
+    b.disabled = !connected;
+  }
+}
+
+/* ----- Web Bluetooth check ----- */
+function ensureBluetooth() {
+  if (!navigator.bluetooth) {
+    setStatus('This browser does not support Web Bluetooth. Use Chrome or Edge over https:// or http://localhost.',
+              'err');
+    ui.scan.disabled = true;
+    return false;
+  }
+  return true;
+}
+
+/* ----- Connect via browser device picker ----- */
+async function pickAndConnect() {
+  if (!ensureBluetooth()) return;
+
+  ui.scan.disabled = true;
+  setStatus('Pick your Foldio360 in the browser dialog...', 'busy');
+
+  try {
+    const dev = await navigator.bluetooth.requestDevice({
+      filters: [{ services: [NUS_SERVICE] },
+                { namePrefix: 'Foldio' }],
+      optionalServices: [NUS_SERVICE],
+    });
+    await connectTo(dev);
+  } catch (err) {
+    if (err.name === 'NotFoundError') {
+      setStatus('No device selected.', '');
+    } else {
+      setStatus('Connect failed: ' + err.message, 'err');
+    }
+  } finally {
+    ui.scan.disabled = false;
+  }
+}
+
+/* ----- Connect ----- */
+async function connectTo(dev) {
+  setStatus('Connecting to ' + (dev.name || dev.id) + '...', 'busy');
+  try {
+    state.device = dev;
+    dev.addEventListener('gattserverdisconnected', onDisconnected);
+    state.server = await dev.gatt.connect();
+
+    const svc = await state.server.getPrimaryService(NUS_SERVICE);
+    state.writeCh  = await svc.getCharacteristic(NUS_WRITE);
+    state.notifyCh = await svc.getCharacteristic(NUS_NOTIFY);
+
+    await state.notifyCh.startNotifications();
+    state.notifyCh.addEventListener('characteristicvaluechanged', onNotify);
+
+    ui.label.textContent = dev.name || dev.id;
+    setStatus('Device connected.', 'ok');
+    setControlsEnabled(true);
+
+    // Mirror the iOS app's startup handshake.
+    try { await state.writeCh.writeValueWithoutResponse(cmdHello()); }
+    catch (e) { /* non-fatal */ }
+  } catch (err) {
+    setStatus('Connection failed: ' + err.message, 'err');
+    setControlsEnabled(false);
+  }
+}
+
+function onDisconnected() {
+  setStatus('Device disconnected.', 'err');
+  ui.label.textContent = 'No device connected';
+  setControlsEnabled(false);
+  state.repeat.active = false;
+  state.server = state.writeCh = state.notifyCh = null;
+}
+
+/* ----- Notifications ----- */
+function onNotify(ev) {
+  const text = new TextDecoder().decode(ev.target.value).trim();
+  setStatus(text, text === 'OK' ? 'ok' : (text === 'FAIL' ? 'err' : ''));
+  // Continuous mode: re-fire on completion OK.
+  if (text === 'OK' && state.repeat.active && state.writeCh) {
+    const angle = parseInt(ui.angle.value, 10) || 360;
+    state.writeCh.writeValueWithoutResponse(
+      cmdRotate(state.repeat.right, angle))
+      .catch((e) => console.warn('repeat failed:', e));
+  }
+}
+
+/* ----- Sending ----- */
+async function sendRotate(right, infinite) {
+  if (!state.writeCh) return;
+  const angle = parseInt(ui.angle.value, 10) || 360;
+  state.repeat.active = !!infinite;
+  state.repeat.right  = right;
+  try {
+    await state.writeCh.writeValueWithoutResponse(cmdRotate(right, angle));
+    setStatus(`-> rotate(${right ? 'CW' : 'CCW'},${angle},${SPEED},0)` +
+              (infinite ? '  (continuous)' : ''),
+              'busy');
+  } catch (err) {
+    setStatus('Write failed: ' + err.message, 'err');
+  }
+}
+
+async function sendStop() {
+  if (!state.writeCh) return;
+  state.repeat.active = false;
+  try {
+    await state.writeCh.writeValueWithoutResponse(cmdStop());
+    setStatus('-> cancel(0)', 'busy');
+  } catch (err) {
+    setStatus('Write failed: ' + err.message, 'err');
+  }
+}
+
+/* ----- Wire up UI ----- */
+ui.scan.addEventListener('click', pickAndConnect);
+ui.left.addEventListener('click',     () => sendRotate(false, false));
+ui.right.addEventListener('click',    () => sendRotate(true,  false));
+ui.leftInf.addEventListener('click',  () => sendRotate(false, true));
+ui.rightInf.addEventListener('click', () => sendRotate(true,  true));
+ui.stop.addEventListener('click',     sendStop);
+
+ensureBluetooth();
+</script>
+</body>
+</html>
