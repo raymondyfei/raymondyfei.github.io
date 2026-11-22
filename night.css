@@ -186,6 +186,7 @@ img.mfp-img {
 }
 
 #maincontent {
+  PADDING-TOP: 12px;
   PADDING-BOTTOM: 20px;
   PADDING-RIGHT: 20px;
   MARGIN: 9px 24px 30px;
